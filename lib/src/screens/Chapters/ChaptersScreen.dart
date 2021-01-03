@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran/src/Blocs/ChaptersBloc/chapters_bloc.dart';
-import 'package:holy_quran/src/Models/ChaptersModel.dart';
+
 import 'package:holy_quran/src/assets/NavigateAssets.dart';
 import 'package:holy_quran/src/config/DependenciesProvider.dart';
-import 'package:holy_quran/src/screens/Chapters/ChaptersRepo.dart';
+
 import 'package:holy_quran/src/screens/Verses/MainVersesScreen.dart';
-import 'package:holy_quran/src/screens/Verses/VersesScreen.dart';
+
 
 class ChaptersScreen extends StatefulWidget {
   @override
@@ -90,6 +90,9 @@ ChaptersBloc _chaptersBloc;
                       },
                     ),
                   );
+                  if(state is LoadError){
+                    return Center(child: Text("LoadError"),);
+                  }
                   return Container();
                 },
               ),

@@ -25,6 +25,7 @@ class ChaptersBloc extends Bloc<ChaptersEvent, ChaptersState> {
         var response = await _chaptersRepo.getChapters();
         yield(ChaptersLoadedSuccessfully(response));
       } on DioError catch (e) {
+        print(e.message);
         yield LoadError();
       }
     }

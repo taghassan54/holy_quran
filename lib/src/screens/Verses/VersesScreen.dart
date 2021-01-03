@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holy_quran/src/Blocs/VersesBloc/verses_bloc.dart';
 import 'package:holy_quran/src/Models/ChaptersModel.dart';
-import 'package:holy_quran/src/Models/VersesModel.dart';
+
 import 'package:holy_quran/src/assets/Sizing.dart';
 import 'package:holy_quran/src/config/DependenciesProvider.dart';
-import 'package:holy_quran/src/screens/Verses/VersesRepo.dart';
+
 
 class VersesScreen extends StatefulWidget {
   final Chapters chapters;
@@ -105,21 +105,22 @@ class _VersesScreenState extends State<VersesScreen> {
     page = 1;
     _versesBloc
         .add(LoadVerses(page: page, chapters: widget.chapters, recitation: 4));
-    // _versesBloc.forEach((state) {
-    //   if (state is VersesLoadedSuccessfully) {
-    //     play();
-    //   }
-    // });
+    _versesBloc.forEach((state) {
+      if (state is VersesLoadedSuccessfully) {
+        play();
+      }
+    });
+    setUrl(recitation: 'http://server7.mp3quran.net/s_gmd');
+
     audioPlayer = AudioPlayer();
     audioPlayerStatus = 0;
     playComplet = false;
-    setUrl();
 
     super.initState();
   }
 
   play() async {
-    int result = await audioPlayer.play(url);
+ await audioPlayer.play(url);
 
     setState(() {
       audioPlayerStatus = 1;
@@ -295,7 +296,7 @@ class _VersesScreenState extends State<VersesScreen> {
                                       size: 24.0,
                                     ),
                                     onPressed: () async {
-                                      int result = await audioPlayer.pause();
+                                   await audioPlayer.pause();
 
                                       setState(() {
                                         audioPlayerStatus = 0;
@@ -310,11 +311,12 @@ class _VersesScreenState extends State<VersesScreen> {
                                     ),
                                     onPressed: () async {
                                       if (playComplet) {
-                                        int result = await audioPlayer
+                                        await audioPlayer
                                             .seek(Duration(seconds: 0));
                                         await audioPlayer.resume();
                                       } else {
-                                        int result = await audioPlayer.resume();
+
+                                         await audioPlayer.resume();
                                       }
                                       setState(() {
                                         audioPlayerStatus = 1;
@@ -356,10 +358,10 @@ class _VersesScreenState extends State<VersesScreen> {
     String recitation = 'http://server7.mp3quran.net/s_gmd',
   }) {
     if (widget.chapters.id.toString().length == 1)
-      url = "${recitation}/00${widget.chapters.id}.mp3";
+      url = "$recitation/00${widget.chapters.id}.mp3";
     else if (widget.chapters.id.toString().length == 2)
-      url = "${recitation}/0${widget.chapters.id}.mp3";
+      url = "$recitation/0${widget.chapters.id}.mp3";
     else if (widget.chapters.id.toString().length == 3)
-      url = "${recitation}/${widget.chapters.id}.mp3";
+      url = "$recitation/${widget.chapters.id}.mp3";
   }
 }

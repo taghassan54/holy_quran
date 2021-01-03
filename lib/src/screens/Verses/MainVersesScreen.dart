@@ -12,7 +12,7 @@ class MainVersesScreen extends StatefulWidget {
 }
 
 class _MainVersesScreenState extends State<MainVersesScreen> {
-  int _currentIndex = 0;
+
 
   @override
   void initState() {
@@ -20,22 +20,15 @@ class _MainVersesScreenState extends State<MainVersesScreen> {
     // TODO: implement initState
     super.initState();
   }
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _children = [
-      VersesScreen(widget.chapters),
-      Container()
-    ];
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         bottomNavigationBar:TabBar(
-            onTap: onTabTapped,
+
          // this will be set when a new tab is tapped
           tabs: [
             Tab(
