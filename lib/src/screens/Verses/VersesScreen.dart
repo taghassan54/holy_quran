@@ -7,7 +7,6 @@ import 'package:holy_quran/src/Models/ChaptersModel.dart';
 import 'package:holy_quran/src/assets/Sizing.dart';
 import 'package:holy_quran/src/config/DependenciesProvider.dart';
 
-
 class VersesScreen extends StatefulWidget {
   final Chapters chapters;
 
@@ -65,7 +64,8 @@ class _VersesScreenState extends State<VersesScreen> {
     {
       "name": 'ياسر الدوسري - حفص عن عاصم',
       'url': 'http://server11.mp3quran.net/yasser'
-    },{
+    },
+    {
       "name": 'عبدالله بصفر - حفص عن عاصم',
       'url': 'http://server6.mp3quran.net/bsfr'
     },
@@ -120,7 +120,7 @@ class _VersesScreenState extends State<VersesScreen> {
   }
 
   play() async {
- await audioPlayer.play(url);
+    await audioPlayer.play(url);
 
     setState(() {
       audioPlayerStatus = 1;
@@ -178,13 +178,13 @@ class _VersesScreenState extends State<VersesScreen> {
                       Expanded(
                         flex: 10,
                         child: Container(
-                            margin: EdgeInsets.only(top: 20),
+                            margin: EdgeInsets.only(top: 5),
                             child: ListView.builder(
                               itemCount: state.versesModel.verses.length,
                               itemBuilder: (context, index) {
                                 return Center(
                                   child: Container(
-                                    padding: EdgeInsets.all(7),
+                                    padding: EdgeInsets.all(8),
                                     child: Center(
                                       child: RichText(
                                           text: TextSpan(
@@ -296,7 +296,7 @@ class _VersesScreenState extends State<VersesScreen> {
                                       size: 24.0,
                                     ),
                                     onPressed: () async {
-                                   await audioPlayer.pause();
+                                      await audioPlayer.pause();
 
                                       setState(() {
                                         audioPlayerStatus = 0;
@@ -315,8 +315,7 @@ class _VersesScreenState extends State<VersesScreen> {
                                             .seek(Duration(seconds: 0));
                                         await audioPlayer.resume();
                                       } else {
-
-                                         await audioPlayer.resume();
+                                        await audioPlayer.resume();
                                       }
                                       setState(() {
                                         audioPlayerStatus = 1;

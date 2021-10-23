@@ -20,6 +20,7 @@ class ChaptersBloc extends Bloc<ChaptersEvent, ChaptersState> {
     ChaptersEvent event,
   ) async* {
     if(event is LoadChapters){
+      yield(LoadingState());
       try{
 
         var response = await _chaptersRepo.getChapters();

@@ -27,7 +27,27 @@ ChaptersBloc _chaptersBloc;
     super.initState();
   }
 
+void _onLoading() {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: new Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            new CircularProgressIndicator(),
+            new Text("Loading"),
+          ],
+        ),
+      );
+    },
+  );
+  new Future.delayed(new Duration(seconds: 3), () {
+    //pop dialog
 
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +72,8 @@ ChaptersBloc _chaptersBloc;
               child: BlocBuilder(
                 cubit: _chaptersBloc,
                 builder: (context, state) {
+                  if(state is LoadingState)
+                    return CircularProgressIndicator();
                   if(state is ChaptersLoadedSuccessfully)
                   return Container(
                     margin: EdgeInsets.only(top: 0),
